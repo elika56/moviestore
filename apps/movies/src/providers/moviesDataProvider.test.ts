@@ -8,14 +8,7 @@ describe('MoviesDataProvider', () => {
     const testImdbId = 'tt3896198';
 
     beforeAll(() => {
-        const baseUrl = process.env.IMDB_URL || '';
-        const apiKey = process.env.IMDB_API_KEY || '';
-        
-        if (!apiKey) {
-            throw new Error('IMDB_API_KEY environment variable is required for tests. Make sure .env file exists and contains IMDB_API_KEY.');
-        }
-
-        provider = new MoviesDataProvider(baseUrl, apiKey);
+        provider = new MoviesDataProvider();
     });
 
     describe('getMovieById', () => {
