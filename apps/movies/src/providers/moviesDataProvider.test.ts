@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { describe, it, expect, beforeAll } from 'vitest';
 import { MoviesDataProvider } from './moviesDataProvider.js';
-import { OMDbMovieResponse } from './OMDbMovieResponse.js';
+import type { OMDbMovieResponse } from './OMDbMovieResponse.js';
 
 describe('MoviesDataProvider', () => {
     let provider: MoviesDataProvider;
@@ -22,7 +22,6 @@ describe('MoviesDataProvider', () => {
         it('should return movie details for IMDb ID tt3896198', async () => {
             const result = await provider.getMovieById(testImdbId);
 
-            expect(result).toBeInstanceOf(OMDbMovieResponse);
             expect(result.imdbID).toBe(testImdbId);
             expect(result.Response).toBe('True');
             expect(result.Title).toBeDefined();
@@ -35,7 +34,6 @@ describe('MoviesDataProvider', () => {
         it('should return full plot when plot parameter is "full"', async () => {
             const result = await provider.getMovieById(testImdbId, 'full');
 
-            expect(result).toBeInstanceOf(OMDbMovieResponse);
             expect(result.imdbID).toBe(testImdbId);
             expect(result.Response).toBe('True');
             expect(result.Plot).toBeDefined();
@@ -45,7 +43,6 @@ describe('MoviesDataProvider', () => {
         it('should return short plot by default', async () => {
             const result = await provider.getMovieById(testImdbId);
 
-            expect(result).toBeInstanceOf(OMDbMovieResponse);
             expect(result.imdbID).toBe(testImdbId);
             expect(result.Response).toBe('True');
             expect(result.Plot).toBeDefined();

@@ -43,7 +43,7 @@ export class MoviesDataProvider {
         if (page) params.page = page;
 
         const response = await this.axiosInstance.get('', { params });
-        return new OMDbSearchResponse(response.data);
+        return response.data as OMDbSearchResponse;
     }
 
     /**
@@ -58,7 +58,7 @@ export class MoviesDataProvider {
                 plot
             }
         });
-        return new OMDbMovieResponse(response.data);
+        return response.data as OMDbMovieResponse;
     }
 
     /**
@@ -80,6 +80,6 @@ export class MoviesDataProvider {
         if (year) params.y = year;
 
         const response = await this.axiosInstance.get('', { params });
-        return new OMDbMovieResponse(response.data);
+        return response.data as OMDbMovieResponse;
     }
 }
