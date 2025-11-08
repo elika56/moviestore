@@ -30,7 +30,7 @@ describe('MoviesService', () => {
 
         it('should return movie entity with all required fields', async () => {
             const result = await service.search({ imdbId: testImdbId });
-            console.log(JSON.stringify(result, null, 2));
+
             expect(result.Title).toBeDefined();
             expect(result.Year).toBeDefined();
             expect(result.Rated).toBeDefined();
