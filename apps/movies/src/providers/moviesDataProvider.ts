@@ -8,14 +8,17 @@ export class MoviesDataProvider {
 
     private axiosInstance: AxiosInstance;
 
-    constructor(private readonly baseUrl: string, private readonly apiKey: string) {
+    private readonly baseUrl: string;
+    private readonly apiKey: string;
+
+    constructor() {
         this.baseUrl = process.env.IMDB_URL || '';
         this.apiKey = process.env.IMDB_API_KEY || '';
 
         this.axiosInstance = axios.create({
-            baseURL: baseUrl,
+            baseURL: this.baseUrl,
             params: {
-                apikey: apiKey,
+                apikey: this.apiKey,
                 r: 'json'
             }
         });
