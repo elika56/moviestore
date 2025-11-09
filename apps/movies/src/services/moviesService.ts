@@ -1,20 +1,25 @@
+import { Injectable, Inject } from '@nestjs/common';
 import { MoviesDataProvider } from '../providers/moviesDataProvider.js';
+import { MoviesRepository } from '../repositories/movies.repository.js';
 import { Movie } from '../entities/movie.entity.js';
 import { OMDbMovieResponse } from '../providers/OMDbMovieResponse.js';
 
+@Injectable()
 export class MoviesService {
     private dataProvider: MoviesDataProvider;
+    private repository: MoviesRepository;
 
-    constructor() {
+    constructor(@Inject(MoviesRepository) repository: MoviesRepository) {
+        this.repository = repository;
         this.dataProvider = new MoviesDataProvider();
     }
 
     async search(params: {
-        imdbId?: string;
-        query?: string;
-        type?: 'movie' | 'series' | 'episode';
-        year?: string;
-        page?: number;
+        imdbId?: string|undefined;
+        query?: string|undefined;
+        type?: 'movie' | 'series' | 'episode'|undefined;
+        year?: string|undefined;
+        page?: number|undefined;
     }): Promise<Movie> {
         let response: OMDbMovieResponse;
 
@@ -43,5 +48,21 @@ export class MoviesService {
         const movie = Object.assign(new Movie(), movieData);
 
         return movie;
+    }
+
+    async create(movie: Movie): Promise<Movie> {
+        return await this.repository.create(movie);
+    }
+
+    async update(imdbId: string, updates: Partial<Movie>): Promise<Movie> {
+        return await this.repository.update(imdbId, updates);
+    }
+
+    async getById(imdbId: string): Promise<Movie | undefined> {
+        return await this.repository.getById(imdbId);
+    }
+
+    async delete(imdbId: string): Promise<Movie | undefined> {
+        return await this.repository.delete(imdbId);
     }
 }

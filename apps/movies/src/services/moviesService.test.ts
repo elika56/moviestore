@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { describe, it, expect, beforeAll } from 'vitest';
 import { MoviesService } from './moviesService.js';
+import { MoviesRepository } from '../repositories/movies.repository.js';
 import { Movie } from '../entities/movie.entity.js';
 
 describe('MoviesService', () => {
@@ -8,7 +9,8 @@ describe('MoviesService', () => {
     const testImdbId = 'tt3896198';
 
     beforeAll(() => {
-        service = new MoviesService();
+        const repository = new MoviesRepository();
+        service = new MoviesService(repository);
     });
 
     describe('search', () => {

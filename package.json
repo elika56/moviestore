@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "start": "tsx apps/movies/src/main.ts",
+    "start:movies": "tsx apps/movies/src/main.ts"
   },
   "repository": {
     "type": "git",
@@ -21,11 +23,20 @@
   "homepage": "https://github.com/elika56/moviestore#readme",
   "devDependencies": {
     "@types/node": "^24.10.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "vitest": "^4.0.8"
   },
   "dependencies": {
+    "@nestjs/common": "^11.1.8",
+    "@nestjs/core": "^11.1.8",
+    "@nestjs/platform-express": "^11.1.8",
+    "@nestjs/swagger": "^11.2.1",
     "axios": "^1.13.2",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "nestjs-zod": "^5.0.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^3.25.76"
   }
 }
