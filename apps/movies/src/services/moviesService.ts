@@ -50,19 +50,56 @@ export class MoviesService {
         return movie;
     }
 
+    /**
+     * Create a new movie in the repository
+     * @param movie - Movie entity to create
+     * @returns Created movie
+     */
     async create(movie: Movie): Promise<Movie> {
-        return await this.repository.create(movie);
+        return this.repository.create(movie);
     }
 
+    /**
+     * Update an existing movie in the repository
+     * @param imdbId - IMDb ID of the movie to update
+     * @param updates - Partial movie data to update
+     * @returns Updated movie
+     */
     async update(imdbId: string, updates: Partial<Movie>): Promise<Movie> {
-        return await this.repository.update(imdbId, updates);
+        return this.repository.update(imdbId, updates);
     }
 
+    /**
+     * Get a movie by IMDb ID from the repository
+     * @param imdbId - IMDb ID to search for
+     * @returns Movie if found, undefined otherwise
+     */
     async getById(imdbId: string): Promise<Movie | undefined> {
-        return await this.repository.getById(imdbId);
+        return this.repository.getById(imdbId);
     }
 
+    /**
+     * Query movies from the repository with optional filters
+     * @param filters - Optional filters (title, year, genre, type, director, actor)
+     * @returns Array of matching movies
+     */
+    async query(filters?: {
+        title?: string;
+        year?: string;
+        genre?: string;
+        type?: string;
+        director?: string;
+        actor?: string;
+    }): Promise<Movie[]> {
+        return this.repository.query(filters);
+    }
+
+    /**
+     * Delete a movie from the repository
+     * @param imdbId - IMDb ID of the movie to delete
+     * @returns Deleted movie if found, undefined otherwise
+     */
     async delete(imdbId: string): Promise<Movie | undefined> {
-        return await this.repository.delete(imdbId);
+        return this.repository.delete(imdbId);
     }
 }
