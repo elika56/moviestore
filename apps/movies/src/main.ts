@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { MoviesModule } from './movies.module.js';
+import { MovieDto } from './dto/movie.dto.js';
 
 async function bootstrap() {
     const app = await NestFactory.create(MoviesModule);
@@ -12,7 +13,7 @@ async function bootstrap() {
         .setVersion('1.0')
         .build();
     const document = SwaggerModule.createDocument(app, config, {
-        extraModels: []
+        extraModels: [MovieDto]
     });
     SwaggerModule.setup('api', app, document);
     
