@@ -1,23 +1,25 @@
+import { Injectable, Inject } from '@nestjs/common';
 import { MoviesDataProvider } from '../providers/moviesDataProvider.js';
+import { MoviesRepository } from '../repositories/movies.repository.js';
 import { Movie } from '../entities/movie.entity.js';
 import { OMDbMovieResponse } from '../providers/OMDbMovieResponse.js';
-import { MoviesRepository } from '../repositories/movies.repository.js';
 
+@Injectable()
 export class MoviesService {
     private dataProvider: MoviesDataProvider;
     private repository: MoviesRepository;
 
-    constructor() {
+    constructor(@Inject(MoviesRepository) repository: MoviesRepository) {
+        this.repository = repository;
         this.dataProvider = new MoviesDataProvider();
-        this.repository = new MoviesRepository();
     }
 
     async search(params: {
-        imdbId?: string;
-        query?: string;
-        type?: 'movie' | 'series' | 'episode';
-        year?: string;
-        page?: number;
+        imdbId?: string|undefined;
+        query?: string|undefined;
+        type?: 'movie' | 'series' | 'episode'|undefined;
+        year?: string|undefined;
+        page?: number|undefined;
     }): Promise<Movie> {
         let response: OMDbMovieResponse;
 

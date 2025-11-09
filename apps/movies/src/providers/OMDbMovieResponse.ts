@@ -1,5 +1,10 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class OMDbRating {
+    @ApiProperty({ example: 'Internet Movie Database', description: 'Rating source' })
     Source!: string;
+    
+    @ApiProperty({ example: '7.6/10', description: 'Rating value' })
     Value!: string;
 }
 

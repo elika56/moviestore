@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import 'dotenv/config';
 import { Movie } from '../entities/movie.entity.js';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
@@ -7,6 +8,7 @@ interface MoviesDatabase {
     movies: Movie[];
 }
 
+@Injectable()
 export class MoviesRepository {
     private getDbFile(): string {
         const dbPath = process.env.MOVIES_DB_PATH || '';

@@ -40,5 +40,16 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    
+    // Decorator support for NestJS
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    
+    // Path mappings
+    "baseUrl": ".",
+    "paths": {
+      "@entities/*": ["entities/*"],
+      "entities/*": ["entities/*"]
+    }
   }
 }

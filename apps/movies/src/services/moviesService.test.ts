@@ -1,6 +1,7 @@
 import 'dotenv/config';
-import { describe, it, expect, beforeAll, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { MoviesService } from './moviesService.js';
+import { MoviesRepository } from '../repositories/movies.repository.js';
 import { Movie } from '../entities/movie.entity.js';
 import { readFileSync, writeFileSync, existsSync, unlinkSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
@@ -72,7 +73,9 @@ describe('MoviesService', () => {
         // Initialize empty database
         writeFileSync(fullPath, JSON.stringify({ movies: [] }, null, 2), 'utf-8');
         
-        service = new MoviesService();
+        // Create repository and service with proper dependency injection
+        const repository = new MoviesRepository();
+        service = new MoviesService(repository);
     });
 
     afterEach(() => {
